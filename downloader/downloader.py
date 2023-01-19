@@ -115,7 +115,11 @@ def downloadSingleVideo(path, input):
 def main(choice, input, ip):
 
     # PATH = f'Data/{str(round(time.time() * 1000))}'
-    PATH = f'Data/{ip}'
+    root = 'Data'
+    if not os.path.isdir(root):
+        os.makedirs(root)
+
+    PATH = f'{root}/{ip}'
     if not os.path.isdir(PATH):
         os.makedirs(PATH)
 
