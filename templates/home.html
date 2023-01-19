@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/css/base.css">
+    <script src="static/js/base.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="{% url 'download' %}" method="get">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <button class="start-btn" type="submit">Start</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

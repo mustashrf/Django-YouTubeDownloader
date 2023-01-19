@@ -1,0 +1,5 @@
+pytube
+django-crispy-forms
+crispy-bootstrap5
+environs[django]
+gunicorn

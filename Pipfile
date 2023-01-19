@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pytube = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
+environs = {extras = ["django"], version = "*"}
+gunicorn = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
