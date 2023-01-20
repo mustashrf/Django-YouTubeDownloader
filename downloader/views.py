@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import DownloaderForm
 from django.http import HttpResponse, FileResponse
 from .downloader import main, upgradePackage
-import mimetypes
+# import mimetypes
 
 # Create your views here.
 def home(request):
