@@ -1,7 +1,7 @@
 from pytube import YouTube , Playlist
 import os
 from zipfile import ZipFile
-import time
+# import time
 
 def getExceptions(str):
 
@@ -113,15 +113,12 @@ def downloadSingleVideo(path, input):
     return msg
 
 def main(choice, input, ip):
-
-    upgradePackage()
-
     # PATH = f'Data/{str(round(time.time() * 1000))}'
-    root = 'Data'
-    if not os.path.isdir(root):
-        os.makedirs(root)
+    base_dir = 'Data'
+    if not os.path.isdir(base_dir):
+        os.makedirs(base_dir)
 
-    PATH = f'{root}/{ip}'
+    PATH = f'{base_dir}/{ip}'
     if not os.path.isdir(PATH):
         os.makedirs(PATH)
 

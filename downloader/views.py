@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from .forms import DownloaderForm
 from django.http import HttpResponse, FileResponse
-from .downloader import main
+from .downloader import main, upgradePackage
 import mimetypes
 
 # Create your views here.
 def home(request):
+    upgradePackage()
     return render(request, 'home.html', {'form':DownloaderForm})
 
 def get_client_ip(request):
