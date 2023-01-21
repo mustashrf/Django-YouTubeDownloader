@@ -6,7 +6,7 @@ from .downloader import main, upgradePackage
 
 # Create your views here.
 def home(request):
-    upgradePackage()
+    # upgradePackage()
     return render(request, 'home.html', {'form':DownloaderForm})
 
 def get_client_ip(request):

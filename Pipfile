@@ -7,9 +7,6 @@ name = "pypi"
 pytube = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
-gunicorn = "*"
-whitenoise = "*"
-brotli = "*"
 environs = {extras = ["django"], version = "*"}
 
 [dev-packages]
