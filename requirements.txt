@@ -2,3 +2,8 @@ pytube
 django-crispy-forms
 crispy-bootstrap5
 environs[django]
+
+# Celery
+# django-celery-beat 
+# django-celery-results
+# redis

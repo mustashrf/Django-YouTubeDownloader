@@ -7,9 +7,10 @@ name = "pypi"
 pytube = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+django = "*"
 environs = {extras = ["django"], version = "*"}
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3.8"

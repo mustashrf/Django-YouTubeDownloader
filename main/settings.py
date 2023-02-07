@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'downloader.apps.DownloaderConfig',
 
     # 3rd party
+    # 'django_celery_beat',
+    # 'django_celery_results',
     'crispy_forms',
     'crispy_bootstrap5',
 ]
@@ -137,3 +139,23 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CELERY_CONFIG
+###########################################################################
+
+# # save Celery task results in Django's database
+# CELERY_RESULT_BACKEND = "django-db"
+# # or saving results in redis
+# # CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+# CELERY_BROKER_URL = env('CELERY_BROKER_REDIS_URL', default='redis://localhost:6379')
+
+# # allow scheduling items in Django admin.
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+
+# # Serializing config
+# CELERY_TASK_SERIALIZER = 'pickle'
+# CELERY_RESULT_SERIALIZER = 'pickle'
+# CELERY_ACCEPT_CONTENT = ['pickle']
+
+###########################################################################

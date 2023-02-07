@@ -1,13 +1,8 @@
-from django.shortcuts import render
-from .forms import DownloaderForm
-from django.http import HttpResponse, FileResponse
-from .downloader import main, upgradePackage
-# import mimetypes
+from main.celery import app
 
-# Create your views here.
-def home(request):
-    upgradePackage()
-    return render(request, 'home.html', {'form':DownloaderForm})
+from django.http import FileResponse, HttpResponse
+
+from .downloader import *
 
 def get_client_ip(request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -17,7 +12,8 @@ def get_client_ip(request):
             ip = request.META.get('REMOTE_ADDR')
         return str(ip)
 
-def download(request):
+@app.task
+def do_the_stuff(request):
     if request.GET:
         data = request.GET
         choice = data['choice']
@@ -29,10 +25,9 @@ def download(request):
         ip = get_client_ip(request)
 
         # return_waiting_page.delay()
-        msg, file = main.delay(choice, input, ip).get()
+        msg, file = main(choice, input, ip)
 
         if msg:
-            filename = file.split('/')[-1]
             f = open(file, 'rb')
 
             # mime_type, _ = mimetypes.guess_type(file)
@@ -45,3 +40,6 @@ def download(request):
         else:
             return HttpResponse('Error')
 
+@app.task
+def return_waiting_page():
+    return HttpResponse('Waiting...')

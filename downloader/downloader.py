@@ -68,7 +68,7 @@ def downloadPlaylist(path, input):
             if i in playlist_range:
                 try:
                     print("Downloading {}".format(video.title))
-                    video.streams.get_audio_only().download(path)
+                    video.streams.get_audio_only().download(path + f'/{playlist_name}')
                     d+=1
                 except:
                     print(f'Download failed for {video.title}')
@@ -92,22 +92,24 @@ def downloadSingleVideo(path, input):
 
     video = YouTube(link)
     
-    print("Downloading",video.title)
+    video_name = video.title
+
+    print("Downloading", video_name)
     if option == 'video':
         try:
             video.streams.get_by_resolution(quality).download(path)
         except:
-            print(f'Download failed for {video.title}')
+            print(f'Download failed for {video_name}')
             return None
 
     elif option == 'audio':
         try:
             video.streams.get_audio_only().download(path)
         except:
-            print(f'Download failed for {video.title}')
+            print(f'Download failed for {video_name}')
             return None
 
-    msg = 'Downloaded!'
+    msg = f'{video_name}: Downloaded!'
     print(msg)
     print('===============')
     return msg
@@ -124,24 +126,25 @@ def main(choice, input, ip):
 
     if choice == 'p':
         msg = downloadPlaylist(PATH, input)
+        title = msg.split(':')[0]
+        zipfilename = PATH + f'/{title}.zip'
+        
+        PATH += f'/{title}'
+        if not os.path.isfile(zipfilename):
+            files_list = os.listdir(PATH)
+
+            if len(files_list) == 1:
+                zipfilename = PATH + '/' + files_list[0]
+            else:
+                zipfile = ZipFile(zipfilename, 'w')
+                for file in files_list:
+                    zipfile.write(f'{PATH}/{file}', arcname=file)
+        return msg, zipfilename
     
     elif choice == 's':
         msg = downloadSingleVideo(PATH, input)
-
-    if msg:
-        files_list = os.listdir(PATH)
-        if len(files_list) == 1:
-            file = files_list[0]
-            return msg, f'{PATH}/{file}'
-
-        elif len(files_list) > 1:
-            name = msg.split(':')[0]
-            filename = PATH + f'/{name}.zip'
-            if not os.path.isfile(filename):
-                zipfile = ZipFile(filename, 'w')
-                for file in files_list:
-                    zipfile.write(f'{PATH}/{file}', arcname=file)
-            return msg, filename
+        file = msg.split(':')[0]
+        return msg, f'{PATH}/{file}'
 
     else:
         return None
