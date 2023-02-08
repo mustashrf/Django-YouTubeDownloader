@@ -16,6 +16,6 @@ QUALITY_OPTIONS = [
 class DownloaderForm(forms.Form):
     choice = forms.ChoiceField(choices=CHOICE_OPTIONS, label='Playlist or Single Video')
     url = forms.CharField(max_length=100, label='URL')
-    exceptions = forms.CharField(max_length=50, required=False)
+    exceptions = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'e.g. 1,2-5,7,8-11'}))
     av = forms.ChoiceField(choices=TYPE_OPTIONS, label='Video or Audio')
     quality = forms.ChoiceField(choices=QUALITY_OPTIONS)
